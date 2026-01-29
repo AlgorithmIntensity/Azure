@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Messenger</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emoji-picker-element@1.14.0/dist/emoji-picker.min.css">
+</head>
+<body>
+    <div id="auth-screen" class="screen active">
+        <div class="auth-container">
+            <div class="auth-header">
+                <div class="logo">
+                    <i class="fab fa-microsoft"></i>
+                    <span>Azure</span>
+                </div>
+                <h1>Добро пожаловать</h1>
+                <p>Безопасный обмен сообщениями с поддержкой фото и видео</p>
+                <h6>Сделал AlgorithmIntensity :)</h6>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="tab-btn active" data-tab="login">
+                    <i class="fas fa-sign-in-alt"></i> Вход
+                </button>
+                <button class="tab-btn" data-tab="register">
+                    <i class="fas fa-user-plus"></i> Регистрация
+                </button>
+            </div>
+            
+            <div class="auth-content">
+                <div id="login-form" class="auth-form active">
+                    <div class="form-group">
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="login-username" placeholder="Имя пользователя" autocomplete="username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="login-password" placeholder="Пароль" autocomplete="current-password">
+                            <button type="button" class="show-password" id="show-login-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox">
+                            <input type="checkbox" id="remember-me">
+                            <span>Запомнить меня</span>
+                        </label>
+                        <a href="#" class="forgot-password">Забыли пароль?</a>
+                    </div>
+                    <button id="login-btn" class="auth-btn primary">
+                        <i class="fas fa-sign-in-alt"></i> Войти
+                    </button>
+                    <div class="auth-hint">
+                    </div>
+                </div>
+                
+                <div id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="register-username" placeholder="Имя пользователя" autocomplete="username">
+                        </div>
+                        <div class="input-hint">От 3 до 30 символов (латинские буквы, цифры, ._-)</div>
+                    </div>
+                    
+                    <div class="name-fields">
+                        <div class="form-group half">
+                            <div class="input-with-icon">
+                                <i class="fas fa-id-card"></i>
+                                <input type="text" id="register-firstname" placeholder="Имя (необязательно)" autocomplete="given-name">
+                            </div>
+                        </div>
+                        <div class="form-group half">
+                            <div class="input-with-icon">
+                                <i class="fas fa-id-card"></i>
+                                <input type="text" id="register-lastname" placeholder="Фамилия (необязательно)" autocomplete="family-name">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="register-password" placeholder="Пароль (не менее 6 символов)" autocomplete="new-password">
+                            <button type="button" class="show-password" id="show-register-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirm-password" placeholder="Подтверждение пароля" autocomplete="new-password">
+                        </div>
+                    </div>
+                    
+                    <div class="avatar-section">
+                        <h4>Выберите цвет аватара:</h4>
+                        <div class="avatar-colors">
+                            <div class="color-option active" data-color="0078D4" style="background: #0078D4;" title="Синий Azure">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="color-option" data-color="E81123" style="background: #E81123;" title="Красный">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="color-option" data-color="107C10" style="background: #107C10;" title="Зеленый">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="color-option" data-color="FFB900" style="background: #FFB900;" title="Желтый">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="color-option" data-color="5D5FEF" style="background: #5D5FEF;" title="Фиолетовый">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="color-option" data-color="FF8C00" style="background: #FF8C00;" title="Оранжевый">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="register-btn" class="auth-btn success">
+                        <i class="fas fa-user-plus"></i> Зарегистрироваться
+                    </button>
+                </div>
+            </div>
+            
+            <div class="auth-error" id="auth-error"></div>
+        </div>
+        
+        <div class="auth-footer">
+            <p>Azure Messenger v1.0 © 2026</p>
+        </div>
+    </div>
+
+    <div id="chat-screen" class="screen">
+        <div class="chat-container">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <div class="user-info" id="sidebar-user-info">
+                        <div class="user-avatar-container">
+                            <img id="user-avatar" src="" alt="Avatar">
+                            <div class="user-status online"></div>
+                        </div>
+                        <div class="user-details">
+                            <span id="current-fullname" class="user-name"></span>
+                            <span id="current-username" class="user-handle"></span>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button id="profile-btn" class="icon-btn tooltip" data-tooltip="Профиль">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                        <button id="logout-btn" class="icon-btn tooltip" data-tooltip="Выйти">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="global-search" placeholder="Поиск сообщений, пользователей...">
+                </div>
+                
+                <div class="sidebar-tabs">
+                    <button class="sidebar-tab active" data-tab="rooms">
+                        <i class="fas fa-comments"></i>
+                        <span>Комнаты</span>
+                    </button>
+                    <button class="sidebar-tab" data-tab="users">
+                        <i class="fas fa-users"></i>
+                        <span>Онлайн <span id="online-count" class="badge">0</span></span>
+                    </button>
+                    <button class="sidebar-tab" data-tab="private">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>Приват</span>
+                        <span id="unread-private-count" class="badge unread" style="display: none;">0</span>
+                    </button>
+                    <button class="sidebar-tab" data-tab="media">
+                        <i class="fas fa-photo-video"></i>
+                        <span>Медиа</span>
+                    </button>
+                </div>
+                
+                <div class="sidebar-content">
+                    <div id="rooms-panel" class="tab-panel active">
+                        <div class="panel-header">
+                            <h3>Комнаты</h3>
+                            <button id="create-room-btn" class="icon-btn" title="Создать комнату">
+                                <i class="fas fa-plus-circle"></i>
+                            </button>
+                        </div>
+                        <div class="rooms-list" id="rooms-list">
+                            <!-- Динамически заполняется -->
+                        </div>
+                    </div>
+                    
+                    <div id="users-panel" class="tab-panel">
+                        <div class="panel-header">
+                            <h3>Пользователи онлайн</h3>
+                        </div>
+                        <div class="users-list" id="users-list">
+                            <!-- Динамически заполняется -->
+                        </div>
+                    </div>
+                    
+                    <div id="private-panel" class="tab-panel">
+                        <div class="panel-header">
+                            <h3>Приватные чаты</h3>
+                            <button id="new-private-btn" class="icon-btn" title="Новый чат">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <div class="private-chats-list" id="private-chats-list">
+                            <!-- Динамически заполняется -->
+                        </div>
+                    </div>
+                    
+                    <div id="media-panel" class="tab-panel">
+                        <div class="panel-header">
+                            <h3>Медиафайлы</h3>
+                        </div>
+                        <div class="media-gallery" id="media-gallery">
+                            <div class="media-empty">
+                                <i class="fas fa-photo-video"></i>
+                                <p>Здесь будут отображаться фото и видео из чата</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-footer">
+                    <button id="admin-panel-btn" class="admin-btn" style="display: none;">
+                        <i class="fas fa-shield-alt"></i> Панель администратора
+                    </button>
+                </div>
+            </div>
+
+            <div class="main-chat">
+                <div class="chat-header">
+                    <div class="chat-title">
+                        <h2 id="current-chat-title">
+                            <i class="fas fa-hashtag"></i> Общий чат
+                        </h2>
+                        <div class="chat-meta">
+                            <span id="chat-type" class="chat-type-badge">PUBLIC</span>
+                            <span id="participants-count" class="participants">
+                                <i class="fas fa-user"></i> <span>0</span>
+                            </span>
+                            <span id="chat-description" class="chat-description">Основной чат для всех пользователей</span>
+                        </div>
+                    </div>
+                    <div class="chat-actions">
+                        <button id="chat-info-btn" class="icon-btn tooltip" data-tooltip="Информация о чате">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                        <button id="invite-btn" class="icon-btn tooltip" data-tooltip="Пригласить" style="display: none;">
+                            <i class="fas fa-user-plus"></i>
+                        </button>
+                        <button id="pin-btn" class="icon-btn tooltip" data-tooltip="Закрепить">
+                            <i class="fas fa-thumbtack"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-btn tooltip" data-tooltip="Сменить тему">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <button id="clear-chat" class="icon-btn tooltip danger" data-tooltip="Очистить чат">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="messages-container" id="messages-container">
+                    <div class="welcome-message">
+                        <div class="welcome-icon">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <h2>Добро пожаловать в Azure Messenger</h2>
+                        <p>Начните общение в комнате или создайте приватный чат</p>
+                        <div class="welcome-features">
+                            <div class="feature">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Безопасность</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bolt"></i>
+                                <span>Скорость</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-users"></i>
+                                <span>Сообщество</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-photo-video"></i>
+                                <span>Медиа 500МБ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="typing-indicator" id="typing-indicator"></div>
+
+                <div class="message-input-area">
+                    <div class="input-actions">
+                        <button id="emoji-btn" class="icon-btn tooltip" data-tooltip="Эмодзи">
+                            <i class="far fa-smile" style="color: black;"></i>
+                        </button>
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="file-upload" multiple accept="image/*,video/*">
+                            <button id="file-btn" class="icon-btn tooltip" data-tooltip="Прикрепить файл (до 500МБ)">
+                                 <i class="fas fa-paperclip" style="color: black;"></i>
+                            </button>
+                        </div>
+                        <!-- button id="format-btn" class="icon-btn tooltip" data-tooltip="Форматирование">
+                            <i class="fas fa-bold" style="color: black;"></i>
+                        </button> -->
+                        <button id="voice-btn" class="icon-btn tooltip" data-tooltip="Голосовое сообщение">
+                            <i class="fas fa-microphone" style="color: black;"></i>
+                        </button>
+                    </div>
+                    <div class="input-container">
+                        <textarea id="message-input" placeholder="Введите сообщение... (Shift+Enter для новой строки)" rows="1"></textarea>
+                        <div class="input-buttons">
+                            <button id="send-btn" class="send-btn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="upload-progress" id="upload-progress" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <span id="progress-text">Загрузка...</span>
+                        <button id="cancel-upload" class="cancel-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-sidebar" id="right-sidebar">
+                <div class="right-sidebar-header">
+                    <h3 id="right-sidebar-title">
+                        <i class="fas fa-users"></i> Участники
+                    </h3>
+                    <button id="close-sidebar" class="icon-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="right-sidebar-content" id="right-sidebar-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <emoji-picker id="emoji-picker" class="emoji-picker"></emoji-picker>
+
+    <div class="modal" id="admin-modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3><i class="fas fa-shield-alt"></i> Панель администратора</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-tab="users">
+                        <i class="fas fa-users"></i> Пользователи
+                    </button>
+                    <button class="admin-tab" data-tab="rooms">
+                        <i class="fas fa-comments"></i> Комнаты
+                    </button>
+                    <button class="admin-tab" data-tab="moderation">
+                        <i class="fas fa-gavel"></i> Модерация
+                    </button>
+                    <button class="admin-tab" data-tab="statistics">
+                        <i class="fas fa-chart-bar"></i> Статистика
+                    </button>
+                </div>
+                
+                <div class="admin-tab-content">
+                    <div id="admin-users-tab" class="admin-panel active">
+                        <div class="admin-section">
+                            <h4><i class="fas fa-user-cog"></i> Управление пользователями</h4>
+                            <div class="admin-controls">
+                                <div class="select-wrapper">
+                                    <i class="fas fa-user"></i>
+                                    <select id="admin-user-select">
+                                        <option value="">Выберите пользователя</option>
+                                    </select>
+                                </div>
+                                <div class="action-buttons">
+                                    <button id="mute-user-btn" class="admin-action-btn warning">
+                                        <i class="fas fa-volume-mute"></i> Заглушить
+                                    </button>
+                                    <button id="unmute-user-btn" class="admin-action-btn success">
+                                        <i class="fas fa-volume-up"></i> Снять заглушение
+                                    </button>
+                                    <button id="ban-user-btn" class="admin-action-btn danger">
+                                        <i class="fas fa-ban"></i> Заблокировать
+                                    </button>
+                                    <button id="unban-user-btn" class="admin-action-btn">
+                                        <i class="fas fa-check"></i> Разблокировать
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="admin-form">
+                                <div class="form-group">
+                                    <label><i class="fas fa-clock"></i> Длительность (секунды)</label>
+                                    <input type="number" id="mute-duration" placeholder="300" min="60" max="86400" value="300">
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-comment"></i> Причина действия</label>
+                                    <textarea id="admin-reason" placeholder="Укажите причину..." rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="admin-section">
+                            <h4><i class="fas fa-user-edit"></i> Редактирование профиля</h4>
+                            <div class="profile-edit-form">
+                                <div class="form-group">
+                                    <label>Имя</label>
+                                    <input type="text" id="admin-edit-firstname" placeholder="Имя">
+                                </div>
+                                <div class="form-group">
+                                    <label>Фамилия</label>
+                                    <input type="text" id="admin-edit-lastname" placeholder="Фамилия">
+                                </div>
+                                <div class="form-group">
+                                    <label>О себе</label>
+                                    <textarea id="admin-edit-bio" placeholder="О себе" rows="2"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Цвет аватара</label>
+                                    <input type="color" id="admin-edit-color" value="#0078D4">
+                                </div>
+                                <button id="admin-update-profile-btn" class="admin-action-btn">
+                                    <i class="fas fa-save"></i> Сохранить изменения
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="admin-rooms-tab" class="admin-panel">
+                        <div class="admin-section">
+                            <h4><i class="fas fa-plus-circle"></i> Создание комнаты</h4>
+                            <div class="room-creation-form">
+                                <div class="form-group">
+                                    <label>Название комнаты</label>
+                                    <input type="text" id="new-room-name" placeholder="Название комнаты">
+                                </div>
+                                <div class="form-group">
+                                    <label>Описание</label>
+                                    <textarea id="new-room-description" placeholder="Описание комнаты" rows="2"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="checkbox">
+                                        <input type="checkbox" id="room-is-private">
+                                        <span>Приватная комната</span>
+                                    </label>
+                                </div>
+                                <div class="form-group" id="allowed-users-group" style="display: none;">
+                                    <label>Разрешенные пользователи:</label>
+                                    <div id="allowed-users-list" class="tags-container"></div>
+                                    <div class="add-user-input">
+                                        <input type="text" id="add-allowed-user" placeholder="Добавить пользователя">
+                                        <button id="add-user-btn" class="small-btn">+</button>
+                                    </div>
+                                </div>
+                                <button id="create-private-room-btn" class="admin-action-btn success">
+                                    <i class="fas fa-plus-circle"></i> Создать комнату
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="admin-section">
+                            <h4><i class="fas fa-list"></i> Список комнат</h4>
+                            <div class="rooms-admin-list" id="rooms-admin-list"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="admin-moderation-tab" class="admin-panel">
+                        <div class="admin-section">
+                            <h4><i class="fas fa-comment-slash"></i> Модерация сообщений</h4>
+                            <div class="message-moderation">
+                                <div class="message-list" id="admin-message-list"></div>
+                                <button id="refresh-messages-btn" class="admin-action-btn">
+                                    <i class="fas fa-sync"></i> Обновить сообщения
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="admin-statistics-tab" class="admin-panel">
+                        <div class="admin-section">
+                            <h4><i class="fas fa-chart-line"></i> Статистика</h4>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-icon primary">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <span class="stat-value" id="stat-total-users">0</span>
+                                        <span class="stat-label">Всего пользователей</span>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon success">
+                                        <i class="fas fa-user-check"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <span class="stat-value" id="stat-online-users">0</span>
+                                        <span class="stat-label">Онлайн сейчас</span>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon warning">
+                                        <i class="fas fa-comments"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <span class="stat-value" id="stat-total-messages">0</span>
+                                        <span class="stat-label">Всего сообщений</span>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-color: #ff4757;">
+                                        <i class="fas fa-file-upload"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <span class="stat-value" id="stat-total-files">0</span>
+                                        <span class="stat-label">Файлов загружено</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="new-private-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-comment-medical"></i> Новый приватный чат</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="select-wrapper">
+                    <i class="fas fa-user"></i>
+                    <select id="private-user-select">
+                        <option value="">Выберите пользователя</option>
+                    </select>
+                </div>
+                <button id="start-private-chat-btn" class="primary-btn full-width">
+                    <i class="fas fa-comments"></i> Начать чат
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="profile-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-circle"></i> Мой профиль</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="profile-info">
+                    <div class="profile-avatar-large">
+                        <img id="profile-avatar-large" src="" alt="Avatar">
+                        <div class="profile-status online"></div>
+                    </div>
+                    <div class="profile-details">
+                        <h4 id="profile-fullname"></h4>
+                        <p class="profile-username" id="profile-username"></p>
+                        <p class="profile-bio" id="profile-bio">Нет информации</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Зарегистрирован: <span id="profile-join-date">Сегодня</span></span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-comment"></i>
+                                <span>Сообщений: <span id="profile-message-count">0</span></span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-user-tag"></i>
+                                <span>Роль: <span id="profile-role" class="role-badge">USER</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-edit-section">
+                    <h5><i class="fas fa-edit"></i> Редактировать профиль</h5>
+                    <div class="edit-form">
+                        <div class="form-group">
+                            <label>Имя</label>
+                            <input type="text" id="edit-firstname" placeholder="Имя">
+                        </div>
+                        <div class="form-group">
+                            <label>Фамилия</label>
+                            <input type="text" id="edit-lastname" placeholder="Фамилия">
+                        </div>
+                        <div class="form-group">
+                            <label>О себе</label>
+                            <textarea id="edit-bio" placeholder="О себе" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Цвет аватара</label>
+                            <input type="color" id="edit-color" value="#0078D4">
+                        </div>
+                        <button id="save-profile-btn" class="primary-btn">
+                            <i class="fas fa-save"></i> Сохранить изменения
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="file-preview-modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="file-preview-title"></h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="file-preview-content"></div>
+                <div class="file-info" id="file-info">
+                    <p><i class="fas fa-user"></i> Отправитель: <span id="file-sender"></span></p>
+                    <p><i class="fas fa-clock"></i> Время: <span id="file-time"></span></p>
+                    <p><i class="fas fa-file"></i> Размер: <span id="file-size"></span></p>
+                </div>
+                <div class="file-actions">
+                    <a id="file-download-link" class="primary-btn" download>
+                        <i class="fas fa-download"></i> Скачать
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification-center" id="notification-center"></div>
+
+    <script>
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 
+                        'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 
+                        'KeyB', 'KeyA'];
+    let konamiIndex = 0;
+    document.addEventListener('keydown', (e) => {
+        if (e.code === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+            document.body.style.transform = 'rotate(180deg)';
+            document.body.style.transition = 'transform 2s';
+            setTimeout(() => {
+            document.body.style.transform = 'rotate(0deg)';
+            }, 3000);
+            
+            konamiIndex = 0;
+        }
+        } else {
+        konamiIndex = 0;
+        }
+    });
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emoji-picker-element@1.14.0/dist/emoji-picker.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

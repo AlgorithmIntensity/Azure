@@ -1,7 +1,7 @@
 для запуска сервера прописываем в командной строке:
-npm install
+install
 
 после этого
-npm start
+run
 
 нужен Node.JS
