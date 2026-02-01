@@ -1,0 +1,43 @@
+[
+  {
+    "username": "teacher",
+    "passwordHash": "$2b$10$I4TBdoOqc0GD92jRpbMB3uBfDnHvR2Rrjj.NunxbE3kBn3nx32vZG",
+    "firstName": "Admin",
+    "lastName": "",
+    "avatarColor": "0091ff",
+    "isAdmin": true,
+    "bio": "Учитель",
+    "joinDate": 1769700427371,
+    "settings": {
+      "theme": "dark",
+      "notifications": true,
+      "sound": true,
+      "autoDownload": false,
+      "messagePreview": true,
+      "privacy": "",
+      "language": "ru",
+      "onlineStatus": false,
+      "timeFormat": "12",
+      "fontSize": ""
+    }
+  },
+  {
+    "username": "AlgorithmIntensity",
+    "passwordHash": "$2b$10$/Hq/6po2DLpPgPrtrIUtzOmo80phX948c08FxcbQKh5tvdGhXraKW",
+    "firstName": "Algorithm",
+    "lastName": "Intensity",
+    "avatarColor": "FF4500",
+    "isAdmin": true,
+    "bio": "мне лень писать био в коде",
+    "joinDate": 1769700434027,
+    "settings": {
+      "theme": "light",
+      "notifications": true,
+      "sound": true,
+      "autoDownload": false,
+      "messagePreview": true,
+      "privacy": "public",
+      "language": "ru"
+    }
+  }
+]
